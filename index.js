@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const fs = require("fs");
 
 async function main() {
   const browser = await puppeteer.launch({
@@ -31,6 +32,18 @@ async function main() {
       }
     );
   });
+
+  try {
+    fs.writeFile("data.txt", JSON.stringify(jobDetails), (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log("File has been saved.");
+      }
+    });
+  } catch (err) {
+    console.error(err);
+  }
 
   console.log(jobDetails);
 
